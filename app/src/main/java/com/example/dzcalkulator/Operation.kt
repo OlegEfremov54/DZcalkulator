@@ -40,7 +40,6 @@ class Operation( val first:String, val second:String) {
         if (!aChar.contains('m') && (!aChar.contains('s'))) {
             rez = "0"
             rezMinSt = "0"
-
         }
         if (!aChar.contains('m') && (!aChar.contains('h'))) {
             for (i in sekcount + 1..aChar.size - 1) {

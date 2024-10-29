@@ -7,9 +7,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toolbar
 
 class MainActivity : AppCompatActivity(),View.OnClickListener {
-
+        private lateinit var toolbarMain: Toolbar
         private lateinit var firstOperandTE: EditText
         private lateinit var secondOperandTE: EditText
 
@@ -24,6 +25,12 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_main)
+            toolbarMain=findViewById(R.id.toolbarMain)
+            setSupportActionBar(toolbarMain)
+            title="Калькулятор времени"
+            toolbarMain.subtitle="версия 1"
+            toolbarMain.setLogo(R.drawable.ic_android_black_24dp)
+
             firstOperandTE = findViewById(R.id.festOperandET)
             secondOperandTE = findViewById(R.id.secondOperandET)
 
@@ -58,7 +65,7 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
                     secondOperandTE.text.clear()
                     check = false
                 }
-                R.id.buttonExitBTN -> finish()
+                R.id.buttonExitBTN -> {finish()}
                 else -> "0.0"
             }
             if (!check) resultTV.text = "Результат" else resultTV.text = result.toString()
