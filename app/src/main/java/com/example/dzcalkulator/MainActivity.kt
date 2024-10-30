@@ -1,13 +1,16 @@
 package com.example.dzcalkulator
 
-
+import androidx.appcompat.widget.Toolbar
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toolbar
+import android.widget.Toast
+
 
 class MainActivity : AppCompatActivity(),View.OnClickListener {
         private lateinit var toolbarMain: Toolbar
@@ -19,8 +22,7 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
 
         private lateinit var resultTV: TextView
 
-        private lateinit var resetButtonBTN: Button
-        private lateinit var exitButtonBTN: Button
+
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -37,38 +39,74 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
             sumButtonBTN = findViewById(R.id.buttonSumBTN)
             difButtonBTN = findViewById(R.id.buttonDifBTN)
 
-            resetButtonBTN = findViewById(R.id.buttonResetBTN)
-            exitButtonBTN = findViewById(R.id.buttonExitBTN)
 
             resultTV = findViewById(R.id.resultTV)
 
             sumButtonBTN.setOnClickListener(this)
             difButtonBTN.setOnClickListener(this)
-            resetButtonBTN.setOnClickListener(this)
-            exitButtonBTN.setOnClickListener(this)
+
         }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.resetMenuMain -> {
+                firstOperandTE.text.clear()
+                secondOperandTE.text.clear()
+                resultTV.text = "Результат"
+                Toast.makeText(applicationContext, "Данные очищены",
+                    Toast.LENGTH_LONG).show()
+                
+            }
+            R.id.exitMenuMain ->{
+
+                Toast.makeText(applicationContext, "Работа приложения завершена",
+                    Toast.LENGTH_LONG).show()
+                finish()
+            }
+
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
         override fun onClick(v: View) {
-            var check = true
 
             if (firstOperandTE.text.isEmpty() || secondOperandTE.text.isEmpty()) {
                 return
             }
             val first = firstOperandTE.text.toString()
             val second = secondOperandTE.text.toString()
+            val sum=Operation(first, second).sum()
+            val dif=Operation(first, second).dif()
 
             val result = when (v.id) {
-                R.id.buttonSumBTN -> Operation(first, second).sum()
-                R.id.buttonDifBTN -> Operation(first, second).dif()
-                R.id.buttonResetBTN -> {
-                    firstOperandTE.text.clear()
-                    secondOperandTE.text.clear()
-                    check = false
+                R.id.buttonSumBTN -> {
+                    Toast.makeText(
+                        applicationContext,
+                        "Результат суммы: $sum",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    resultTV.text="$sum"
                 }
-                R.id.buttonExitBTN -> {finish()}
+                R.id.buttonDifBTN ->{
+                    Toast.makeText(
+                        applicationContext,
+                        "Результат разности: $dif",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    resultTV.text="$dif"
+
+                }
+
+
                 else -> "0.0"
             }
-            if (!check) resultTV.text = "Результат" else resultTV.text = result.toString()
+
         }
     }
 

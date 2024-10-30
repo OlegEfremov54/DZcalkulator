@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/resetMenuMain"
+        android:orderInCategory="50"
+        android:title="@string/reset"
+        tools:ignore="MenuTitle" />
+    <item
+        android:id="@+id/exitMenuMain"
+        android:orderInCategory="50"
+        android:title="@string/exit"
+        tools:ignore="MenuTitle" />
+
+</menu>

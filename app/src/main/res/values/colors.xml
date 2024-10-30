@@ -2,5 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="mediumPurple">#9370DB</color>
+    <color name="mediumPurple">#006400</color>
+    <color name="baton">#008000</color>
+    <color name="keycol">#8B0000</color>
 </resources>
